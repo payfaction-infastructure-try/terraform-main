@@ -14,6 +14,10 @@ variable "AWS_RESOURCE_NAME_PREFIX" {
   description = "Prefix to be used in the naming of some of the created AWS resources e.g. demo-webapp"
 } 
 
+variable "ENVIRONMENT_PREFIX" {
+  description = "Prefix to be used in the naming of environment (e.g. development, staging, production)"
+}
+
 variable "CIRCLECI_API_TOKEN" {
   description = "API token for using circleci"
 }

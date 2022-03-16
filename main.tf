@@ -13,14 +13,18 @@ provider "circleci" {
 ####### LOCALS #######
 
 locals {
-  aws_ecs_cluster_name = "${var.AWS_RESOURCE_NAME_PREFIX}-cluster"
-  aws_alb_security_group_name = "${var.AWS_RESOURCE_NAME_PREFIX}-alb-security-group"
-  aws_alb_name = "${var.AWS_RESOURCE_NAME_PREFIX}-alb"
-  aws_vpc_name = "${var.AWS_RESOURCE_NAME_PREFIX}-vpc"
-  aws_public_subnet_name = "${var.AWS_RESOURCE_NAME_PREFIX}-public-subnet"
-  aws_private_subnet_name = "${var.AWS_RESOURCE_NAME_PREFIX}-private-subnet"
-  aws_gateway_name = "${var.AWS_RESOURCE_NAME_PREFIX}-gateway"
-  aws_nat_gateway_name = "${var.AWS_RESOURCE_NAME_PREFIX}-nat_gateway"
+  resource_name_prefix = "${var.AWS_RESOURCE_NAME_PREFIX}-${var.ENVIRONMENT_PREFIX}"
+}
+
+locals {
+  aws_ecs_cluster_name = "${local.resource_name_prefix}-cluster"
+  aws_alb_security_group_name = "${local.resource_name_prefix}-alb-security-group"
+  aws_alb_name = "${local.resource_name_prefix}-alb"
+  aws_vpc_name = "${local.resource_name_prefix}-vpc"
+  aws_public_subnet_name = "${local.resource_name_prefix}-public-subnet"
+  aws_private_subnet_name = "${local.resource_name_prefix}-private-subnet"
+  aws_gateway_name = "${local.resource_name_prefix}-gateway"
+  aws_nat_gateway_name = "${local.resource_name_prefix}-nat_gateway"
 }
 
 
