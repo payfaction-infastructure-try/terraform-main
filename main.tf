@@ -155,7 +155,7 @@ resource "aws_ecs_cluster" "main" {
 
 
 resource "circleci_context" "aws" {
-  name  = "aws-${resource_name_prefix}"
+  name  = "aws-${local.resource_name_prefix}"
 }
 
 resource "circleci_context_environment_variable" "aws" {
