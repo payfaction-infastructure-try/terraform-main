@@ -166,4 +166,18 @@ resource "circleci_context_environment_variable" "aws" {
   context_id = circleci_context.aws.id
 }
 
+resource "circleci_context" "aws-resources" {
+  name  = "aws-resources-${var.AWS_RESOURCE_NAME_PREFIX}"
+}
+
+resource "circleci_context_environment_variable" "aws-resources" {
+  for_each = {
+    AWS_ECS_CLUSTER_NAME_PREFIX = "${var.AWS_RESOURCE_NAME_PREFIX}"
+  }
+
+  variable   = each.key
+  value      = each.value
+  context_id = circleci_context.aws-resources.id
+}
+
 
