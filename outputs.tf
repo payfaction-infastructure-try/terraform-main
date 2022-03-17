@@ -22,3 +22,7 @@ output "cluster_id" {
   value = aws_ecs_cluster.main.id
 }
 
+output "alb_default_target_group" {
+  value = aws_lb_target_group.default
+}
+
