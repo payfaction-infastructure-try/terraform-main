@@ -137,6 +137,16 @@ resource "aws_lb" "default" {
   security_groups = [aws_security_group.alb_security_group.id]
 }
 
+resource "aws_lb_listener" "default" {
+  load_balancer_arn = aws_lb.default.id
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+  }
+}
+
 
 
 ####### ECS CLUSTER #######

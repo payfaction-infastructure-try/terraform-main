@@ -6,8 +6,8 @@ output "vpc_id" {
   value = aws_vpc.default.id
 }
 
-output "load_balancer_id" {
-  value = aws_lb.default.id
+output "lb_listener" {
+  value = aws_lb_listener.default
 }
 
 output "load_balancer_security_group_id" {
