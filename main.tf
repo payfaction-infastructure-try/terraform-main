@@ -16,6 +16,7 @@ locals {
   aws_ecs_cluster_name = "${var.AWS_RESOURCE_NAME_PREFIX}-cluster"
   aws_alb_security_group_name = "${var.AWS_RESOURCE_NAME_PREFIX}-alb-security-group"
   aws_alb_name = "${var.AWS_RESOURCE_NAME_PREFIX}-alb"
+  aws_alb_target_group_name = "${var.AWS_RESOURCE_NAME_PREFIX}-alb-target-group"
   aws_vpc_name = "${var.AWS_RESOURCE_NAME_PREFIX}-vpc"
   aws_public_subnet_name = "${var.AWS_RESOURCE_NAME_PREFIX}-public-subnet"
   aws_private_subnet_name = "${var.AWS_RESOURCE_NAME_PREFIX}-private-subnet"
@@ -137,6 +138,14 @@ resource "aws_lb" "default" {
   security_groups = [aws_security_group.alb_security_group.id]
 }
 
+resource "aws_lb_target_group" "default" {
+  name        = "${local.aws_alb_target_group_name}"
+  port        = 80
+  protocol    = "HTTP"
+  vpc_id      = aws_vpc.default.id
+  target_type = "ip"
+}
+
 resource "aws_lb_listener" "default" {
   load_balancer_arn = aws_lb.default.id
   port              = "80"
@@ -144,6 +153,7 @@ resource "aws_lb_listener" "default" {
 
   default_action {
     type             = "forward"
+    target_group_arn = aws_lb_target_group.default.arn
   }
 }
 
